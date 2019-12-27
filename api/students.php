@@ -83,7 +83,7 @@ if ($error == FALSE) {
         $classInsert = $class;
         $teacherInsert = $teacher;
         $periodInsert = $period;
-        $timeInsert = date("H:i A");
+        $timeInsert = date("m/d/Y H:i A");
 
         // Execute statement
         $stmt->execute();

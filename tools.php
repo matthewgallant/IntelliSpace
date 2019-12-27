@@ -16,11 +16,11 @@
         <form name="toolCheckOutForm" id="toolCheckOutForm">
             <div class="form-group">
                 <label for="toolNameField">Name</label>
-                <input type="text" class="form-control" id="toolNameField" placeholder="Ex: Johnny Appleseed">
+                <input type="text" class="form-control" id="toolNameField" name="toolNameField" placeholder="Ex: Johnny Appleseed">
             </div>
             <div class="form-group">
                 <label for="toolOutIDField">Tool ID</label>
-                <input type="tel" class="form-control" id="toolOutIDField" placeholder="Ex: 111222">
+                <input type="tel" class="form-control" id="toolOutIDField" name="toolOutIDField" placeholder="Ex: 111222">
             </div>
         </form>
       </div>
@@ -70,10 +70,104 @@
     <div class="col-sm-3"></div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModalToolOut" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Check Out Success</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        The Tool Has Been Checked Out Successfully!
+
+        <br /><br />
+
+        <i class="far fa-check-circle fa-10x"></i>
+      </div>
+      <div class="modal-footer">
+        <a href="main.php" class="btn btn-primary btn-block">Close</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModalToolOut" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Check Out Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        An Unknown Error Has Occured. Please Try Again Later.
+
+        <br /><br />
+
+        <i class="far fa-times-circle fa-10x"></i>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Issue Modal -->
+<div class="modal fade" id="issueModalToolOut" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="issueModalLabel">Check Out Issue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        Please Fill In All Of The Fields Provided.
+
+        <br /><br />
+
+        <i class="far fa-times-circle fa-10x"></i>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Connection Modal -->
+<div class="modal fade" id="connectionModalToolOut" data-backdrop="static" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="connectionModalLabel">Connection Issue</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" style="text-align: center;">
+        This Device Does Not Seem To Have An Active Internet Connection.
+
+        <br /><br />
+
+        <i class="fas fa-wifi fa-10x"></i>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
     function checkOutTool() {
-
-        // Need to add API page & need to implement feedback modals
 
         // Show Loader
         $("#toolCheckOutButton").html("Sending Info <i class='fas fa-sync fa-spin'></i>");
@@ -83,22 +177,23 @@
             .done(function( data ) {
                 // Do Actions
                 if (data == "Success") {
-                    $('#successModalStudent').modal('show');
+                    $('#successModalToolOut').modal('show');
                 } else if (data == "Error") {
-                    $('#errorModalStudent').modal('show');
+                    $('#errorModalToolOut').modal('show');
                 } else if (data == "Issue") {
-                    $('#issueModalStudent').modal('show');
+                    $('#issueModalToolOut').modal('show');
                 } else {
-                    $('#errorModalStudent').modal('show');
+                    // $('#errorModalToolOut').modal('show');
+                    alert(data);
                 }
             })
             .fail(function() {
                 // No Connection
-                $('#connectionModalStudent').modal('show');
+                $('#connectionModalToolOut').modal('show');
             })
             .always(function() {
                 // Hide Loader
-                $("#studentSubmit").html("Check Out");
+                $("#toolCheckOutButton").html("Check Out");
             });
 
     }
