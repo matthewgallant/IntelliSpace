@@ -41,7 +41,7 @@
         </button>
       </div>
       <div class="modal-body" style="text-align: center;">
-        You've Been Check In Successfully!
+        You've Been Checked In Successfully!
 
         <br /><br />
 
