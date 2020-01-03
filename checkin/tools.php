@@ -88,7 +88,7 @@
         <i class="far fa-check-circle fa-10x"></i>
       </div>
       <div class="modal-footer">
-        <a href="main.php" class="btn btn-primary btn-block">Close</a>
+        <a href="./" class="btn btn-primary btn-block">Close</a>
       </div>
     </div>
   </div>
@@ -184,7 +184,7 @@
         <i class="far fa-check-circle fa-10x"></i>
       </div>
       <div class="modal-footer">
-        <a href="main.php" class="btn btn-primary btn-block">Close</a>
+        <a href="./" class="btn btn-primary btn-block">Close</a>
       </div>
     </div>
   </div>

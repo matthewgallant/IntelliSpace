@@ -1,15 +1,35 @@
+<div style="text-align: center;">
+    <br />
+    <h3>Student Check In</h3>
+    <br />
+</div>
+
 <!-- Form -->
-<form name="classForm" id="classForm">
+<form name="studentForm" id="studentForm">
     <div class="form-group">
-        <label for="teacherField">Teacher Name</label>
-        <input type="text" class="form-control" id="teacherField" name="teacherField" placeholder="Ex: Mr. Appleseed">
+        <label for="nameField">Full Name</label>
+        <input type="text" class="form-control" id="nameField" name="nameField" placeholder="Ex: Johnny Appleseed">
+    </div>
+    <div class="form-group">
+        <label for="gradeSelect">Grade</label>
+        <select class="form-control" id="gradeSelect" name="gradeSelect">
+            <option>Freshman</option>
+            <option>Sophomore</option>
+            <option>Junior</option>
+            <option>Senior</option>
+            <option>Other</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="classField">Class Name</label>
         <input type="text" class="form-control" id="classField" name="classField" placeholder="Ex: English">
     </div>
     <div class="form-group">
-        <label for="periodSelect">Period</label>
+        <label for="teacherField">Teacher Name</label>
+        <input type="text" class="form-control" id="teacherField" name="teacherField" placeholder="Ex: Mr. Appleseed">
+    </div>
+    <div class="form-group">
+        <label for="gradeSelect">Period</label>
         <select class="form-control" id="periodSelect" name="periodSelect">
             <option>Period 1</option>
             <option>Period 2</option>
@@ -23,15 +43,11 @@
             <option>Period 10</option>
         </select>
     </div>
-    <div class="form-group">
-        <label for="descriptionArea">Description of Activity</label>
-        <textarea class="form-control" id="descriptionArea" name="descriptionArea" rows="3" placeholder="Ex: Book Projects"></textarea>
-    </div>
-    <button type="button" name="classSubmit" id="classSubmit" class="btn btn-primary btn-block" onclick="checkInClass()">Check In</button>
+    <button type="button" name="studentSubmit" id="studentSubmit" class="btn btn-primary btn-block" onclick="checkInStudent()">Check In</button>
 </form>
 
 <!-- Success Modal -->
-<div class="modal fade" id="successModalClass" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal fade" id="successModalStudent" data-backdrop="static" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -48,14 +64,14 @@
         <i class="far fa-check-circle fa-10x"></i>
       </div>
       <div class="modal-footer">
-        <a href="main.php" class="btn btn-primary btn-block">Close</a>
+        <a href="./" class="btn btn-primary btn-block">Close</a>
       </div>
     </div>
   </div>
 </div>
 
 <!-- Error Modal -->
-<div class="modal fade" id="errorModalClass" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal fade" id="errorModalStudent" data-backdrop="static" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -79,7 +95,7 @@
 </div>
 
 <!-- Issue Modal -->
-<div class="modal fade" id="issueModalClass" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal fade" id="issueModalStudent" data-backdrop="static" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -103,7 +119,7 @@
 </div>
 
 <!-- Connection Modal -->
-<div class="modal fade" id="connectionModalClass" data-backdrop="static" tabindex="-1" role="dialog">
+<div class="modal fade" id="connectionModalStudent" data-backdrop="static" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -127,32 +143,32 @@
 </div>
 
 <script>
-    function checkInClass() {
+    function checkInStudent() {
 
         // Show Loader
-        $("#classSubmit").html("Sending Info <i class='fas fa-sync fa-spin'></i>");
+        $("#studentSubmit").html("Sending Info <i class='fas fa-sync fa-spin'></i>");
 
         // Send Ajax Request to API
-        $.post("api/classes.php", $("#classForm").serialize())
+        $.post("api/students.php", $("#studentForm").serialize())
             .done(function( data ) {
                 // Do Actions
                 if (data == "Success") {
-                    $('#successModalClass').modal('show')
+                    $('#successModalStudent').modal('show');
                 } else if (data == "Error") {
-                    $('#errorModalClass').modal('show')
+                    $('#errorModalStudent').modal('show');
                 } else if (data == "Issue") {
-                    $('#issueModalClass').modal('show')
+                    $('#issueModalStudent').modal('show');
                 } else {
-                    $('#errorModalClass').modal('show')
+                    $('#errorModalStudent').modal('show');
                 }
             })
             .fail(function() {
                 // No Connection
-                $('#connectionModalClass').modal('show')
+                $('#connectionModalStudent').modal('show');
             })
             .always(function() {
                 // Hide Loader
-                $("#classSubmit").html("Check In");
+                $("#studentSubmit").html("Check In");
             });
 
     }
