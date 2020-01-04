@@ -13,7 +13,7 @@
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT * FROM students"); 
+        $stmt = $conn->prepare("SELECT * FROM toolout"); 
         $stmt->execute();
     
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -59,7 +59,7 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div style="text-align: center;">
-                        <h4>Student Check Ins</h4>
+                        <h4>Tool Check Outs</h4>
                         <br />
                         <button class="btn btn-block btn-primary" type="button" onclick="downloadSheet();">Download Spreadsheet</button>
                         <br />
@@ -71,10 +71,8 @@
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col">Name</th>
-                                <th scope="col">Grade</th>
-                                <th scope="col">Class</th>
-                                <th scope="col">Teacher</th>
-                                <th scope="col">Period</th>
+                                <th scope="col">Asset #</th>
+                                <th scope="col">Description</th>
                                 <th scope="col">Date & Time</th>
                             </tr>
                         </thead>
@@ -82,12 +80,40 @@
                             <?php
 
                                 foreach ($loaded_data as $student_data) {
+
+                                    $asset_name = "";
+
+                                    // Set DB login info
+                                    $servername = "localhost";
+                                    $username = "root";
+                                    $password = "root";
+                                    $dbname = "unispace";
+
+                                    try {
+                                        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+                                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                                        $stmt = $conn->prepare("SELECT name FROM tools WHERE asset = :asset"); 
+
+                                        $stmt->bindParam(':asset', $assetInsert);
+                                        $assetInsert = $student_data['asset'];
+
+                                        $stmt->execute();
+                                    
+                                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+                                        $data = $stmt->fetchAll();
+
+                                        $asset_name = $data[0]['name'];
+
+                                    }
+                                    catch(PDOException $e) {}
+
+                                    // Close connection to database
+                                    $conn = null;
+
                                     echo "<tr>";
                                     echo "<td>" . $student_data['name'] . "</td>";
-                                    echo "<td>" . $student_data['grade'] . "</td>";
-                                    echo "<td>" . $student_data['class'] . "</td>";
-                                    echo "<td>" . $student_data['teacher'] . "</td>";
-                                    echo "<td>" . $student_data['period'] . "</td>";
+                                    echo "<td>" . $student_data['asset'] . "</td>";
+                                    echo "<td>" . $asset_name . "</td>";
                                     echo "<td>" . $student_data['time'] . "</td>";
                                     echo "</tr>";
                                 }
@@ -142,7 +168,7 @@
                     csv.push(row.join(","));        
                 }
                 // Download CSV file
-                downloadCSV(csv.join("\n"), "students.csv");
+                downloadCSV(csv.join("\n"), "tools.csv");
             }
 
         </script>

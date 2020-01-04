@@ -74,6 +74,8 @@
                         <a class="dropdown-item" href="managetools.php">Manage Tools</a>
                     <?php endif; ?>
 
+                    <a class="dropdown-item" href="admins.php">Manage Administrators</a>
+
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" href="settings.php">Software Preferences</a>
