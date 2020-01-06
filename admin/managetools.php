@@ -13,7 +13,7 @@
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT * FROM toolout"); 
+        $stmt = $conn->prepare("SELECT * FROM tools"); 
         $stmt->execute();
     
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
@@ -59,9 +59,10 @@
             <div class="row">
                 <div class="col-sm-3">
                     <div style="text-align: center;">
-                        <h4>Tool Check Outs</h4>
+                        <h4>Manage Tools</h4>
                         <br />
                         <button class="btn btn-block btn-primary" type="button" onclick="downloadSheet();">Download Spreadsheet</button>
+                        <a class="btn btn-block btn-secondary" href="addtool.php">Add Tool</a>
                         <br />
                         <small id="emailHelp" class="form-text text-muted"><?php echo sizeof($loaded_data); ?> Total Entries Found</small>
                     </div>
@@ -72,49 +73,22 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Asset #</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Date & Time</th>
+                                <th scope="col">Current Possesion</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
 
-                                foreach ($loaded_data as $student_data) {
-
-                                    $asset_name = "";
-
-                                    // Set DB login info
-                                    $servername = "localhost";
-                                    $username = "root";
-                                    $password = "root";
-                                    $dbname = "unispace";
-
-                                    try {
-                                        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                        $stmt = $conn->prepare("SELECT name FROM tools WHERE asset = :asset"); 
-
-                                        $stmt->bindParam(':asset', $assetInsert);
-                                        $assetInsert = $student_data['asset'];
-
-                                        $stmt->execute();
-                                    
-                                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-                                        $data = $stmt->fetchAll();
-
-                                        $asset_name = $data[0]['name'];
-
-                                    }
-                                    catch(PDOException $e) {}
-
-                                    // Close connection to database
-                                    $conn = null;
+                                foreach ($loaded_data as $tool_data) {
 
                                     echo "<tr>";
-                                    echo "<td>" . $student_data['name'] . "</td>";
-                                    echo "<td>" . $student_data['asset'] . "</td>";
-                                    echo "<td>" . $asset_name . "</td>";
-                                    echo "<td>" . $student_data['time'] . "</td>";
+                                    echo "<td>" . $tool_data['name'] . "</td>";
+                                    echo "<td>" . $tool_data['asset'] . "</td>";
+                                    echo "<td>" . $tool_data['possesion'] . "</td>";
+                                    echo "<td><a href='edittool.php?asset=" . $tool_data['asset'] . "' class='btn btn-secondary btn-block'><i class='fas fa-edit'></i></a></td>";
+                                    echo "<td><a href='deletetool.php?asset=" . $tool_data['asset'] . "' class='btn btn-danger btn-block'><i class='fas fa-trash'></i></a></td>";
                                     echo "</tr>";
                                 }
 
@@ -168,7 +142,7 @@
                     csv.push(row.join(","));        
                 }
                 // Download CSV file
-                downloadCSV(csv.join("\n"), "toolsout.csv");
+                downloadCSV(csv.join("\n"), "tools.csv");
             }
 
         </script>

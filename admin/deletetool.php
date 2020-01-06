@@ -2,7 +2,19 @@
 
 <?php
 
-    $loaded_data = [];
+// Setup variables
+$name = "";
+$asset = $_GET['asset'];
+$error = FALSE;
+$success = FALSE;
+
+// Check name
+if (isset($_POST['deleteButton'])) {
+    $name = "Temp";
+}
+
+// Submit info to DB
+if ($error == FALSE && $name != "") {
 
     // Set DB login info
     $servername = "localhost";
@@ -12,20 +24,61 @@
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $conn->prepare("SELECT * FROM toolout"); 
+
+        // prepare sql and bind parameters
+        $stmt = $conn->prepare("DELETE FROM tools WHERE asset = :asset");
+        
+        // Prepare row
+        $stmt->bindParam(':asset', $assetInsert);
+
+        // Insert row
+        $assetInsert = $asset;
+
+        // Execute statement
         $stmt->execute();
-    
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-        $data = $stmt->fetchAll();
 
-        $loaded_data = $data;
+        $success = TRUE;
 
+    } catch(PDOException $e) {
+        //$error = TRUE;
     }
-    catch(PDOException $e) {}
 
-    // Close connection to database
+    // Close connection to DB
     $conn = null;
+}
+
+// Set DB login info
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "unispace";
+
+try {
+    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $stmt = $conn->prepare("SELECT * FROM tools WHERE asset = :asset"); 
+
+    // Prepare row
+    $stmt->bindParam(':asset', $assetInsert);
+
+    // Insert row
+    $assetInsert = $asset;
+
+    $stmt->execute();
+
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
+    $data = $stmt->fetchAll();
+
+    $name_field = $data[0]['name'];
+    $asset_field = $data[0]['asset'];
+
+}
+catch(PDOException $e) {}
+
+// Close connection to database
+$conn = null;
 
 ?>
 
@@ -57,73 +110,33 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <br />
+                        <?php if ($error == TRUE): ?>
+                            <div class="alert alert-danger" role="alert">
+                                An error occured. Please try again later. <a href="managetools.php">Go back to manage tools page</a>
+                            </div>
+                        <?php elseif ($success == TRUE): ?>
+                            <div class="alert alert-success" role="alert">
+                                The tool has been successfully deleted. <a href="managetools.php">Go back to manage tools page</a>
+                            </div>
+                        <?php endif; ?>
+                    <br />
                     <div style="text-align: center;">
-                        <h4>Tool Check Outs</h4>
+                        <h4>Delete Tool</h4>
                         <br />
-                        <button class="btn btn-block btn-primary" type="button" onclick="downloadSheet();">Download Spreadsheet</button>
-                        <br />
-                        <small id="emailHelp" class="form-text text-muted"><?php echo sizeof($loaded_data); ?> Total Entries Found</small>
+                            <p>Are you sure that you want to remove <b><?php echo $name_field; ?> (Asset # <?php echo $asset_field; ?>)</b>?</p>
+                        <br />                  
+                        <form action="deletetool.php?asset=<?php echo $asset; ?>" method="POST">
+                                <a href="managetools.php" class="btn btn-primary">Cancel</a>
+                                <button type="submit" class="btn btn-danger" name="deleteButton">Delete Tool</button>
+                            </div>
+                        </form>
                     </div>
-                </div>
-                <div class="col-sm-9">
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Asset #</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Date & Time</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-
-                                foreach ($loaded_data as $student_data) {
-
-                                    $asset_name = "";
-
-                                    // Set DB login info
-                                    $servername = "localhost";
-                                    $username = "root";
-                                    $password = "root";
-                                    $dbname = "unispace";
-
-                                    try {
-                                        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-                                        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                                        $stmt = $conn->prepare("SELECT name FROM tools WHERE asset = :asset"); 
-
-                                        $stmt->bindParam(':asset', $assetInsert);
-                                        $assetInsert = $student_data['asset'];
-
-                                        $stmt->execute();
-                                    
-                                        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
-                                        $data = $stmt->fetchAll();
-
-                                        $asset_name = $data[0]['name'];
-
-                                    }
-                                    catch(PDOException $e) {}
-
-                                    // Close connection to database
-                                    $conn = null;
-
-                                    echo "<tr>";
-                                    echo "<td>" . $student_data['name'] . "</td>";
-                                    echo "<td>" . $student_data['asset'] . "</td>";
-                                    echo "<td>" . $asset_name . "</td>";
-                                    echo "<td>" . $student_data['time'] . "</td>";
-                                    echo "</tr>";
-                                }
-
-                            ?>
-
-                        </tbody>
-                    </table>
-                </div>
-
+                <div class="col-sm-3"></div>
+            </div>
+                
         </div>
 
         <br />

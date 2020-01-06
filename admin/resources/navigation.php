@@ -84,6 +84,10 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link" href="help.php">Help</a>
+            </li>
+
+            <li class="nav-item">
                 <a type="button" class="nav-link" data-toggle="modal" data-target="#copyrightModal">About</a>
             </li>
 
