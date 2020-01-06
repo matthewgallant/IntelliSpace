@@ -121,19 +121,20 @@ $conn = null;
                             <div class="alert alert-success" role="alert">
                                 The tool has been successfully deleted. <a href="managetools.php">Go back to manage tools page</a>
                             </div>
-                        <?php endif; ?>
-                    <br />
-                    <div style="text-align: center;">
-                        <h4>Delete Tool</h4>
-                        <br />
-                            <p>Are you sure that you want to remove <b><?php echo $name_field; ?> (Asset # <?php echo $asset_field; ?>)</b>?</p>
-                        <br />                  
-                        <form action="deletetool.php?asset=<?php echo $asset; ?>" method="POST">
-                                <a href="managetools.php" class="btn btn-primary">Cancel</a>
-                                <button type="submit" class="btn btn-danger" name="deleteButton">Delete Tool</button>
+                        <?php else: ?>
+                            <br />
+                            <div style="text-align: center;">
+                                <h4>Delete Tool</h4>
+                                <br />
+                                    <p>Are you sure that you want to remove <b><?php echo $name_field; ?> (Asset # <?php echo $asset_field; ?>)</b>?</p>
+                                <br />                  
+                                <form action="deletetool.php?asset=<?php echo $asset; ?>" method="POST">
+                                        <a href="managetools.php" class="btn btn-primary">Cancel</a>
+                                        <button type="submit" class="btn btn-danger" name="deleteButton">Delete Tool</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
-                    </div>
+                        <?php endif; ?>
                 <div class="col-sm-3"></div>
             </div>
                 

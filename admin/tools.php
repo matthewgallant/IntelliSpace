@@ -19,7 +19,7 @@
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC); 
         $data = $stmt->fetchAll();
 
-        $loaded_data = $data;
+        $loaded_data = array_reverse($data);
 
     }
     catch(PDOException $e) {}
