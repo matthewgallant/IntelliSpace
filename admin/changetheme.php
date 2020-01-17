@@ -12,11 +12,14 @@ if (isset($_POST['themeRadio'])) {
 
         $theme = $_POST['themeRadio'];
 
+        // Load database login
+        $db_login = parse_ini_file("../../database.conf");
+
         // Set DB login info
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $dbname = "unispace";
+        $servername = $db_login['server'];
+        $username = $db_login['user'];
+        $password = $db_login['pass'];
+        $dbname = $db_login['table'];
 
         try {
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

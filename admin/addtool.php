@@ -21,11 +21,14 @@ if (isset($_POST['toolNameField'])) {
 if (isset($_POST['assetNumberField'])) {
     if ($_POST['assetNumberField'] != "" && strlen($_POST['assetNumberField']) == 6) {
 
+        // Load database login
+        $db_login = parse_ini_file("../../database.conf");
+
         // Set DB login info
-        $servername = "localhost";
-        $username = "root";
-        $password = "root";
-        $dbname = "unispace";
+        $servername = $db_login['server'];
+        $username = $db_login['user'];
+        $password = $db_login['pass'];
+        $dbname = $db_login['table'];
 
         try {
             $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -65,11 +68,14 @@ if (isset($_POST['assetNumberField'])) {
 // Submit info to DB
 if ($error == FALSE) {
 
+    // Load database login
+    $db_login = parse_ini_file("../../database.conf");
+
     // Set DB login info
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-    $dbname = "unispace";
+    $servername = $db_login['server'];
+    $username = $db_login['user'];
+    $password = $db_login['pass'];
+    $dbname = $db_login['table'];
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
