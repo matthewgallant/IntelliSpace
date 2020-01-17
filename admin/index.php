@@ -25,6 +25,33 @@
 
         <br />
 
+        <div style="text-align: center;">
+            <h3>Welcome, Person</h3>
+            <br />
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <a href="students.php" class="btn btn-primary btn-block"><br /><i class="fas fa-school fa-10x"></i><br /><br />Student Check Ins<br /><br /></a>
+                    <br /><br />
+                </div>
+                <div class="col-sm-3">
+                    <a href="classes.php" class="btn btn-primary btn-block"><br /><i class="fas fa-user-friends fa-10x"></i><br /><br />Class Check Ins<br /><br /></a>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-3">
+                    <a href="tools.php" class="btn btn-primary btn-block"><br /><i class="fas fa-hammer fa-10x"></i><br /><br />Tool Check Outs<br /><br /></a>
+                    <br /><br />
+                </div>
+                <div class="col-sm-3">
+                    <a href="managetools.php" class="btn btn-primary btn-block"><br /><i class="fas fa-hand-paper fa-10x"></i><br /><br />Manage Tools<br /><br /></a>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+
         <?php include_once("resources/footer.php"); ?>
 
         <!-- JS -->
