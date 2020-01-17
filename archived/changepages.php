@@ -30,19 +30,19 @@
                 <br />
                 <form>
                 <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="studentsCheck">
+                        <input class="form-check-input" type="checkbox" value="" id="studentsCheck" <?php if (in_array("students", $system_pages)) { echo "checked"; } ?>>
                         <label class="form-check-label" for="studentsCheck">
                             Students
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="classesCheck">
+                        <input class="form-check-input" type="checkbox" value="" id="classesCheck" <?php if (in_array("classes", $system_pages)) { echo "checked"; } ?>>
                         <label class="form-check-label" for="classesCheck">
                             Classes
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="toolsCheck">
+                        <input class="form-check-input" type="checkbox" value="" id="toolsCheck" <?php if (in_array("tools", $system_pages)) { echo "checked"; } ?>>
                         <label class="form-check-label" for="toolsCheck">
                             Tools
                         </label>

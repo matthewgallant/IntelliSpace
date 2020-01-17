@@ -1,5 +1,59 @@
 <?php include_once("resources/setupinfo.php"); ?>
 
+<?php
+
+// Setup variables
+$theme = "";
+$error = FALSE;
+
+// Check name
+if (isset($_POST['themeRadio'])) {
+    if ($_POST['themeRadio'] != "") {
+
+        $theme = $_POST['themeRadio'];
+
+        // Set DB login info
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "unispace";
+
+        try {
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            // set the PDO error mode to exception
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+            // prepare sql and bind parameters
+            $stmt = $conn->prepare("UPDATE setup SET system_theme = :system_theme WHERE id = 1");
+            
+            // Prepare row
+            $stmt->bindParam(':system_theme', $themeInsert);
+
+            // Insert row
+            $themeInsert = $theme;
+
+            // Execute statement
+            $stmt->execute();
+
+            $success = TRUE;
+
+        } catch(PDOException $e) {
+            //$error = TRUE;
+        }
+
+        // Close connection to DB
+        $conn = null;
+    } else {
+        $error = TRUE;
+    }
+
+    if ($error == FALSE) {
+        header("Location: changetheme.php");
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -23,20 +77,24 @@
 
         <?php include_once("resources/navigation.php"); ?>
 
+        <?php if ($error == TRUE): ?>
+            <p>Error</p>
+        <?php endif; ?>
+
         <br />
 
             <div style="text-align: center;">
                 <h3>Change Theme</h3>
                 <br />
-                <form>
+                <form action="changetheme.php" method="POST">
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="themeRadio" id="lightRadio" value="light" checked>
+                        <input class="form-check-input" type="radio" name="themeRadio" id="lightRadio" value="light" <?php if ($system_theme == "light") { echo "checked"; } ?>>
                         <label class="form-check-label" for="lightRadio">
                             Light Theme
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="radio" name="themeRadio" id="darkRadio" value="dark">
+                        <input class="form-check-input" type="radio" name="themeRadio" id="darkRadio" value="dark" <?php if ($system_theme == "dark") { echo "checked"; } ?>>
                         <label class="form-check-label" for="darkRadio">
                             Dark Theme
                         </label>

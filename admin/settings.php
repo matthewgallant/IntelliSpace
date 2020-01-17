@@ -29,15 +29,11 @@
                 <h3>Software Preferences</h3>
                 <br />
                 <div class="row">
-                    <div class="col-sm-3"></div>
-                    <div class="col-sm-3">
+                    <div class="col-sm-4"></div>
+                    <div class="col-sm-4">
                         <a href="changetheme.php" class="btn btn-primary btn-block"><br /><i class="fas fa-eye fa-10x"></i><br /><br />Change Theme<br /><br /></a>
-                        <br /><br />
                     </div>
-                    <div class="col-sm-3">
-                        <a href="changepages.php" class="btn btn-primary btn-block"><br /><i class="fas fa-file fa-10x"></i><br /><br />Manage Accessible Pages<br /><br /></a>
-                    </div>
-                    <div class="col-sm-3"></div>
+                    <div class="col-sm-4"></div>
                 </div>
             </div>
 
