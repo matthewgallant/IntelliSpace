@@ -29,4 +29,24 @@
     // Close connection to database
     $conn = null;
 
+    // Verify session details
+    if ($_SERVER['PHP_SELF'] != "/admin/login.php") {
+
+        session_start();
+
+        if (isset($_SESSION['auth'])) {
+            if ($_SESSION['auth'] != TRUE) {
+
+                // Auth token incorrect
+                header("Location: login.php?no_auth=true");
+
+            }
+        } else {
+
+            // Auth token not set
+            header("Location: login.php?no_auth=true");
+
+        }
+    }
+
 ?>

@@ -16,7 +16,7 @@
                 <div class="col-sm-9">
                     <h3><b>IntelliSpace SMT</b></h3>
                     <h6>Version <?php echo $system_version; ?></h6>
-                    <h6>&copy <?php echo date("Y"); ?> <a href="https://gallantmedia.us" target="_BLANK">Gallant Media</a>. All rights reserved.</h6>
+                    <h6>&copy <?php echo date("Y"); ?> <a href="https://westernmaineweb.com" target="_BLANK">Western Maine Web</a>. All rights reserved.</h6>
                     <h6>Licensed to: <?php echo $system_name; ?></h6>
                 </div>
             </div>
@@ -74,8 +74,6 @@
                         <a class="dropdown-item" href="managetools.php">Manage Tools</a>
                     <?php endif; ?>
 
-                    <a class="dropdown-item" href="admins.php">Manage Administrators</a>
-
                     <div class="dropdown-divider"></div>
 
                     <a class="dropdown-item" href="settings.php">Software Preferences</a>
@@ -93,7 +91,7 @@
 
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
+            <a class="btn btn-danger my-2 my-sm-0" type="submit" href="logout.php">Logout</a>
         </form>
     </div>
 </nav>
