@@ -11,7 +11,7 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-sm-3">
-                    <img src="resources/gallant-media.png" class="img-fluid" alt="Gallant Media Logo">
+                    <img src="resources/wmw-logo.png" class="img-fluid" alt="Western Maine Web Logo">
                 </div>
                 <div class="col-sm-9">
                     <h3><b>IntelliSpace SMT</b></h3>

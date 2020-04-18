@@ -113,12 +113,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-sm-3">
-                            <img src="../admin/resources/gallant-media.png" class="img-fluid" alt="Gallant Media Logo">
+                            <img src="../admin/resources/wmw-logo.png" class="img-fluid" alt="Western Maine Web Logo">
                         </div>
                         <div class="col-sm-9">
                             <h3><b>IntelliSpace SMT</b></h3>
                             <h6>Version <?php echo $system_version; ?></h6>
-                            <h6>&copy <?php echo date("Y"); ?> <a href="https://gallantmedia.us" target="_BLANK">Gallant Media</a>. All rights reserved.</h6>
+                            <h6>&copy <?php echo date("Y"); ?> <a href="https://westernmaineweb.com" target="_BLANK">Western Maine Web</a>. All rights reserved.</h6>
                             <h6>Licensed to: <?php echo $system_name; ?></h6>
                         </div>
                     </div>
