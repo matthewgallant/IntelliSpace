@@ -26,7 +26,8 @@
         <br />
 
         <div style="text-align: center;">
-            <h3>Welcome, Person</h3>
+            <h3>Welcome to IntelliSpace</h3>
+            <p>To get started, click on a box below.</p>
             <br />
             <div class="row">
                 <div class="col-sm-3"></div>

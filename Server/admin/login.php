@@ -190,10 +190,10 @@ if (isset($_POST['emailInput']) && isset($_POST['passwordInput'])) {
                                     <input type="password" class="form-control" id="passwordInput" name="passwordInput">
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-6">
+                                    <div class="col">
                                         <button type="submit" class="btn btn-primary">Login</button>
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col">
                                         <p style="text-align: right; margin-top: 8px; color: green;"><i class="fas fa-lock"></i> &nbsp;Secure Login</p>
                                     </div>
                                 </div>
