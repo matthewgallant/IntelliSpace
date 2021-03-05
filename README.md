@@ -7,7 +7,7 @@ Makerspace Usage &amp; Management Tool
 Import the ```.sql ``` file found in this repo into your database using a tool like phpMyAdmin or manually. You then need to edit the ```database.conf``` file to reflect your database setup (database location, username, password, database name).
 
 #### Server Files
-All you need to do is upload the files to the html root folder of your server, no further file configs are needed. NOTE: please make sure that database.conf file is below the root of your main server folder. Failure to do so would result in your database credentials being publically available on the internet.
+All you need to do is upload the ```Server``` folder to the html root folder of your server, and upload the database.conf file one folder below that. NOTE: please make sure that database.conf file is below the root of your main server folder. Failure to do so would result in your database credentials being publically available on the internet.
 
 #### Configuring the Installation
 ##### Website Info
