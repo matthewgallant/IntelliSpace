@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.7.26)
-# Database: intellispace_mbsic
+# Database: intellispace
 # Generation Time: 2020-04-18 15:46:17 +0000
 # ************************************************************
 
