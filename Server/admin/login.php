@@ -1,4 +1,4 @@
-<?php include_once("resources/setupinfo.php"); ?>
+<?php // include_once("resources/setupinfo.php"); ?>
 
 <?php
 
