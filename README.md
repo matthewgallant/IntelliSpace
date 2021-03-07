@@ -12,7 +12,7 @@ The main purpose of this project is to allow a makerspace to manage usage inform
 
 #### SQL Database
 
-Import the `database.sql ` file found in the root of this repo into your SQL server using a tool like phpMyAdmin or Sequel Pro. You then need to edit the `database.conf` file to reflect your database setup (database location, username, password, database name). In addition to this, you may have to edit several `.php` files to reflect the location of your `database.conf` file. For the sake of security, you should place the ```database.conf``` below the root of your web server so that the file is not publically accessible and not potentially exposing your SQL login details.
+Import the `database.sql` file found in the root of this repo into your SQL server using a tool like phpMyAdmin or Sequel Pro. You then need to edit the `database.conf` file to reflect your database setup (database location, username, password, database name). In addition to this, you may have to edit several `.php` files to reflect the location of your `database.conf` file. For the sake of security, you should place the ```database.conf``` below the root of your web server so that the file is not publically accessible and not potentially exposing your SQL login details.
 
 #### Server Files
 
